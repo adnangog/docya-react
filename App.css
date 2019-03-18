@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&amp;subset=latin-ext');
+
+body {
+  background-color: #2e2e2e !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/* header */
+
+.header-avatar {
+  display: block;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top:0;
+  left: -50px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+.header-avatar img {
+  width: 100%;
+  height: 100%;
+}
+
+/* menu */
+.ant-layout-header.header {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  padding:8px 16px;
+  background-color: #212121;
+  height: auto;
+  line-height: 20px;
+}
+.ant-menu.topMenu {
+  background-color: transparent;
+  border: none;
+  font-size: 1rem !important;
+  font-weight: 700;
+  line-height: 24px;
+  display: inline-block;
+}
+.ant-menu-submenu-title a::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: .655em;
+  vertical-align: .255em;
+  content: "";
+  border-top: .3em solid;
+  border-right: .3em solid transparent;
+  border-bottom: 0;
+  border-left: .3em solid transparent;
+}
+.navbar-brand {
+  display: inline-block;
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+  vertical-align: text-bottom;
+  font-weight: 700;
+  color:#fff;
+  text-decoration: none;
+}
+.topMenu > .ant-menu-item, .ant-menu-submenu, .ant-menu-submenu-title, .ant-menu-submenu-active, .ant-menu-submenu-open {
+  border: none !important;
+  padding: 0 !important;
+  line-height: unset !important;
+}
+.topMenu > .ant-menu-item > a, .ant-menu-submenu-title a {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: .2rem;
+  padding: 8px 15px !important;
+  margin-right: 3px !important;
+  color: rgba(255,255,255,.5) !important;
+  border: none !important;
+}
+.topMenu > .ant-menu-item  > a:hover, .ant-menu-horizontal > .ant-menu-item-selected a, .ant-menu-submenu-title a:hover, .ant-menu-submenu-selected a, .ant-menu-submenu-active a {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: rgba(255,255,255, 1) !important;
+  border: none !important;
+}
+.ant-menu-submenu > .ant-menu, .ant-menu-submenu-popup {
+  background-color: #212121 !important;
+}
+.ant-menu-item > a.menuItem {
+  color: #fff;
+}
+.ant-menu-item > a.menuItem:hover {
+  color: #fff;
+}
+.ant-menu-item:hover, .ant-menu-item:active, .ant-menu-submenu-title:active {
+  background-color: rgba(255,255,255,.2) !important;
+}
+.ant-menu-item-selected {
+  background-color: transparent !important;
+}
+.menuIcon {
+  color: #999;
+  font-size: 1.1rem;
+  margin-right: 5px
+}
+/* menu */
+
+/* bc */
+.ant-breadcrumb.bc {
+  padding: .75rem 1rem;
+  background-color: #e2e2e2;
+  position: relative;
+  padding-left: 50px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+}
+.ant-breadcrumb.bc span.active {
+  color: #111;
+  font-weight: 700;
+}
+.bc-icon {
+  position:absolute; 
+  top:0;
+  left: 0;
+  background-color: #999; 
+  color:#fff;
+  line-height: 48px;
+  display: block;
+  text-align: left;
+  font-size: 20px;
+  padding: 0 10px;
+}
+.bc-icon + span {
+  display: none;
+}
+/* bc */
+
+/* table */
+
+.docyaTable .ant-table-thead > tr > th, .docyaTable .ant-table-small > .ant-table-content .ant-table-header {
+  background: #212121;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+.docyaTable .ant-table-header {
+  background:transparent;
+  border-radius: 0;
+  overflow: hidden !important;
+  margin-bottom: 0 !important;
+}
+
+.docyaTable .ant-table {
+  font-size: 1rem;
+}
+
+.docyaTable .ant-table-small {
+  border-radius: 0;
+  border:none;
+}
+
+.docyaTable .ant-table-body tbody tr:nth-of-type(odd) {
+  background-color: rgba(0,0,0,.05);
+}
