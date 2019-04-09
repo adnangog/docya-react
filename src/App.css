@@ -140,6 +140,10 @@ body {
 
 /* table */
 
+.docyaTable .ant-table-content {
+  border: 1px solid #ccc;
+}
+
 .docyaTable .ant-table-thead > tr > th, .docyaTable .ant-table-small > .ant-table-content .ant-table-header {
   background: #212121;
   color: rgb(255, 255, 255);
@@ -164,3 +168,14 @@ body {
 .docyaTable .ant-table-body tbody tr:nth-of-type(odd) {
   background-color: rgba(0,0,0,.05);
 }
+
+/* typo */
+h1 {
+  color: #333;
+  font-size: 1.4rem;
+  font-weight: 400;
+  border-bottom: 1px solid #999;
+  padding: 0 0 .3rem;
+  margin: 0 0 .8rem;
+}
+/* typo */
