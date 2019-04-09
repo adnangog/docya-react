@@ -18,7 +18,7 @@ class UserDetail extends PureComponent {
       label:null,
       method:null
     },
-    loading: false,
+    sending: false,
     isEdit: false
   }
 
@@ -68,11 +68,23 @@ class UserDetail extends PureComponent {
       const { form,user } = this.state
       let body = {}
 
+      this.setState({
+        sending:true
+      })
+
+      console.log("geldi");
+
       form && form.map(a => {
         body[a.name] = values[a.name];
       });
 
       dispatch(updateuser(accessToken,user._id,body));
+
+      console.log("gitti");
+
+      this.setState({
+        sending:false
+      })
 
 
     } catch (e) {
@@ -95,7 +107,7 @@ class UserDetail extends PureComponent {
 
 
   render() {
-    const { loading, form, action } = this.state;
+    const { sending, form, action } = this.state;
 
     return (
       <>
@@ -104,7 +116,7 @@ class UserDetail extends PureComponent {
         <h2>KULLANICI DETAY</h2>
         <Row>
           <Col sm={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-          <Form form={form} submit={this.save} action={action} />
+          <Form form={form} submit={this.save} action={action} sending={sending} />
           </Col>
         </Row>
         </Layout>

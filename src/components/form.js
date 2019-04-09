@@ -26,13 +26,14 @@ let mapPropsToValues = {};
 class L extends PureComponent {
 
     render() {
-        const { form, action } = this.props;
+        const { form, action,sending } = this.props;
         const label = action.label ? action.label : "";
         form && form.map(a => {
             mapPropsToValues[a.name] = a.value;
         });
 
         return (
+            <Antd.Spin tip="Yükleniyor..." spinning={sending} delay={500}>
             <Form className="login-form">
                 {
                     form && form.map((item, i) =>
@@ -63,6 +64,7 @@ class L extends PureComponent {
                     </Antd.Row>
                 </AntForm.Item>
             </Form>
+            </Antd.Spin>
         );
     }
 }
