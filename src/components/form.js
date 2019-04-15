@@ -18,7 +18,7 @@ const formitemlayout = {
     },
 };
 
-const { Form: AntForm, Icon, Button } = Antd;
+const { Form: AntForm, Button } = Antd;
 
 let validationShape = {};
 let mapPropsToValues = {};
@@ -27,7 +27,7 @@ class L extends PureComponent {
 
     render() {
         const { form, action,sending } = this.props;
-        const label = action.label ? action.label : "";
+        const label = (action && action.label) ? action.label : "Kaydet";
         form && form.map(a => {
             mapPropsToValues[a.name] = a.value;
         });

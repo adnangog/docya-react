@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Button, Popconfirm, Modal, message, Typography, Layout  } from 'antd';
+import { Button, Popconfirm, message, Layout  } from 'antd';
 import { Link } from "react-router-dom";
 
 import List from "../../components/list";
 import Breadcrumb from '../../components/breadcrumb';
+import PageHeader from '../../components/pageHeader'
 
-const {Title} = Typography;
 const {Content} = Layout;
 
 const ButtonGroup = Button.Group;
@@ -52,7 +52,8 @@ class Users extends PureComponent {
           background: '#fff', padding: 15, margin: 15, borderWidth:3, borderColor:'#f1f1f1', borderStyle:'solid'
         }}
         >
-        <h1>Kullanıcılar</h1>
+        <PageHeader title="Kullanıcılar" component={<Link to={`/users/add`}><Button type="default" style={{float:'right'}}>+ Ekle</Button></Link>}/>
+        
           {this.props.users && <List data={this.props.users.data} columns={columns} />}
         </Content>
       </>

@@ -5,19 +5,21 @@ import { Layout, Row, Col } from 'antd';
 import Breadcrumb from '../../components/breadcrumb';
 import Form from '../../components/form';
 import callApi from '../../utils/api';
-import {updateuser} from "../../actions/users";
 import { withRouter } from "react-router-dom";
+import { updateuser, insertuser } from "../../actions/users";
+
+import PageHeader from '../../components/pageHeader'
 
 class UserDetail extends PureComponent {
 
   state = {
     user: null,
     form: null,
-    name: null,
+    title: null,
     action: {
-      type:null,
-      label:null,
-      method:null
+      type: null,
+      label: null,
+      method: null
     },
     sending: false,
     isEdit: false
@@ -35,8 +37,8 @@ class UserDetail extends PureComponent {
         "link": "/users"
       },
       {
-        "label": `${this.state.name}`,
-        "link": `/users/${userId}`
+        "label": `${this.state.title}`,
+        "link": userId ? `/users/${userId}` : "/users/add"
       }
     ]
   };
@@ -52,7 +54,26 @@ class UserDetail extends PureComponent {
           form: res.form,
           user: res.data,
           action: res.action,
-          name: res.data.name
+          title: res.action.title
+        });
+      });
+
+
+    } catch (e) {
+      alert("hata var 2");
+    }
+  }
+
+  getForm = async () => {
+    try {
+
+      const { accessToken } = this.props;
+
+      await callApi(accessToken, `user/v2/form`, 'get', null).then(res => {
+        this.setState({
+          form: res.form,
+          action: res.action,
+          title: res.action.title
         });
       });
 
@@ -65,22 +86,22 @@ class UserDetail extends PureComponent {
   save = async (values) => {
     try {
 
-      const { accessToken,dispatch } = this.props
-      const { form,user } = this.state
+      const { accessToken, dispatch } = this.props
+      const { form, user } = this.state
       let body = {}
 
       this.setState({
-        sending:true
+        sending: true
       })
 
       form && form.map(a => {
         body[a.name] = values[a.name];
       });
 
-      await dispatch(updateuser(accessToken,user._id,body));
+      user ? dispatch(updateuser(accessToken, user._id, body)) : dispatch(insertuser(accessToken,body));
 
       this.setState({
-        sending:false
+        sending: false
       })
 
       this.props.history.push("/users");
@@ -93,6 +114,7 @@ class UserDetail extends PureComponent {
 
   componentWillMount() {
     const { match } = this.props;
+    const { userId } = this.props.match.params;
 
     if (match && match.path.indexOf("/edit/") > -1) {
       this.setState({
@@ -100,24 +122,24 @@ class UserDetail extends PureComponent {
       });
     }
 
-    this.getUser();
+    userId ? this.getUser() : this.getForm();
 
   }
 
 
   render() {
-    const { sending, form, action } = this.state;
+    const { sending, form, action, title } = this.state;
 
     return (
       <>
         <Breadcrumb data={this.bcData()} />
         <Layout style={{ padding: '10px', margin: '30px' }}>
-        <h2>KULLANICI DETAY</h2>
-        <Row>
-          <Col sm={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-          <Form form={form} submit={this.save} action={action} sending={sending} />
-          </Col>
-        </Row>
+          <PageHeader title={title} />
+          <Row>
+            <Col sm={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+              <Form form={form} submit={this.save} action={action} sending={sending} />
+            </Col>
+          </Row>
         </Layout>
       </>
     );

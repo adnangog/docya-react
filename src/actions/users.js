@@ -37,3 +37,16 @@ export function updateuser(token,userId,body) {
       })
   }
 }
+
+export function insertuser(token,body) {
+  return dispatch => {
+      callApi(token, `user/add`, 'POST', body).then(res => {
+          if (res.messageType === 1) {
+            getusers(token);
+              // message.success(validLogin);
+          } 
+          // else
+          //     message.error(invalidLogin);
+      })
+  }
+}

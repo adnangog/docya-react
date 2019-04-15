@@ -10,6 +10,7 @@ export function login(creds) {
             password: creds.password
         }).then(res => {
             if (res.messageType === 1) {
+                localStorage.setItem('token',res.token);
                 dispatch({ type: "LOGIN", user: res.user, token: res.token })
                 message.success(validLogin);
                 dispatch(getInitials(res.token));
