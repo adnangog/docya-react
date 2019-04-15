@@ -6,6 +6,7 @@ import Breadcrumb from '../../components/breadcrumb';
 import Form from '../../components/form';
 import callApi from '../../utils/api';
 import {updateuser} from "../../actions/users";
+import { withRouter } from "react-router-dom";
 
 class UserDetail extends PureComponent {
 
@@ -43,7 +44,7 @@ class UserDetail extends PureComponent {
   getUser = async () => {
     try {
 
-      const { getusers, accessToken } = this.props;
+      const { accessToken } = this.props;
       const { userId } = this.props.match.params;
 
       await callApi(accessToken, `user/v2/${userId}`, 'get', null).then(res => {
@@ -72,19 +73,17 @@ class UserDetail extends PureComponent {
         sending:true
       })
 
-      console.log("geldi");
-
       form && form.map(a => {
         body[a.name] = values[a.name];
       });
 
-      dispatch(updateuser(accessToken,user._id,body));
-
-      console.log("gitti");
+      await dispatch(updateuser(accessToken,user._id,body));
 
       this.setState({
         sending:false
       })
+
+      this.props.history.push("/users");
 
 
     } catch (e) {
@@ -129,4 +128,4 @@ const mapStateToProps = (state) => ({
   accessToken: state.login.accessToken
 });
 
-export default connect(mapStateToProps)(UserDetail);
+export default connect(mapStateToProps)(withRouter(UserDetail));

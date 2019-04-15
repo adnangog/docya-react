@@ -13,6 +13,7 @@ export function login(creds) {
                 dispatch({ type: "LOGIN", user: res.user, token: res.token })
                 message.success(validLogin);
                 dispatch(getInitials(res.token));
+                
             } else
                 message.error(invalidLogin);
         })

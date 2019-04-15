@@ -1,3 +1,5 @@
+import { message } from 'antd'
+import { validUpdate } from '../assets/texts/messages'
 import callApi from '../utils/api'
 
 export function getusers(token) {
@@ -25,9 +27,10 @@ export function getuser(token, userId) {
 export function updateuser(token,userId,body) {
   return dispatch => {
       callApi(token, `user/v2/${userId}`, 'PATCH', body).then(res => {
-          if (res.messageType === 1) {
-            getusers(token);
-              // message.success(validLogin);
+          if (res.ok === 1) {
+            debugger;
+            dispatch(getusers(token));
+            message.success(validUpdate);
           } 
           // else
           //     message.error(invalidLogin);
