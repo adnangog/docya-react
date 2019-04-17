@@ -21,6 +21,23 @@ export function login(creds) {
     }
 }
 
+export function getlogin(creds) {
+    return dispatch => {
+        callApi('', 'user/v2/getlogin', 'post', {
+            email: creds.email,
+            userId: creds.userId
+        }).then(res => {
+            if (res.messageType === 1) {
+                localStorage.setItem('token',res.token);
+                dispatch({ type: "LOGIN", user: res.user, token: res.token })
+                dispatch(getInitials(res.token));
+                
+            } else
+                message.error(invalidLogin);
+        })
+    }
+}
+
 
 export function logout() {
     return dispatch => {
